@@ -27,6 +27,7 @@ from typing import Any, AsyncIterator, Callable
 from arq import create_pool
 from arq.connections import RedisSettings
 from fastapi import FastAPI, HTTPException, Query, Request, Response, status
+from fastapi.responses import JSONResponse
 from langchain_core.messages import AIMessage, BaseMessage
 from langgraph.checkpoint.base import BaseCheckpointSaver
 from redis.asyncio import Redis
@@ -55,6 +56,17 @@ from app.schemas import (
 from app.state import AUTORES_DE_RESPUESTA
 
 log = logging.getLogger("nimbus.api")
+
+
+
+class JSONUtf8(JSONResponse):
+    """JSON con el charset explícito.
+
+    Sin `charset`, algunos clientes (Windows PowerShell 5.1, por ejemplo)
+    decodifican la respuesta como Latin-1 y los acentos llegan rotos.
+    """
+
+    media_type = "application/json; charset=utf-8"
 
 
 @dataclass
@@ -119,6 +131,7 @@ def crear_app(
             "otro `POST /tasks` con el mismo `conversacion_id`."
         ),
         lifespan=lifespan,
+        default_response_class=JSONUtf8,
     )
 
     def recursos(request: Request) -> Recursos:

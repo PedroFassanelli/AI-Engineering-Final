@@ -340,7 +340,7 @@ consultas a la vez y mide la latencia del `POST` (milisegundos) contra la de pun
 
 - **Docker** (Docker Desktop en Windows/macOS).
 - Claves de **OpenAI** (chat y embeddings) y **Pinecone** (plan gratuito; el índice lo crea el sistema).
-- Python 3.12, solo para correr los tests y los scripts de prueba desde la máquina local.
+- Python **3.12** (declarado en [`.python-version`](.python-version) y en la imagen `python:3.12-slim`), solo para correr los tests y los scripts de prueba desde la máquina local.
 
 ### Una sola instrucción
 
