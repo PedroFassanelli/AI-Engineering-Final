@@ -17,7 +17,7 @@ langchain-openai>=1.0              # chat (PROVEEDOR=openai) y embeddings
 langchain-anthropic>=1.0           # PROVEEDOR=anthropic
 
 # --- RAG: Pinecone (vectorial) + BM25 (lexico) -------------------------------
-pinecone[asyncio]>=7.0             # PineconeAsyncio / IndexAsyncio: sin llamadas sync
+pinecone>=10.0,<11                 # AsyncPinecone / AsyncIndex incluidos: sin llamadas sync
 rank_bm25>=0.2
 langchain-text-splitters>=1.0      # sub-division de secciones largas, medida en tokens
 tiktoken>=0.8

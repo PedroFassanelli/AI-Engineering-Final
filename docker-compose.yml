@@ -29,7 +29,9 @@ services:
       retries: 10
 
   phoenix:
-    image: arizephoenix/phoenix:latest
+    # Versión fija: la probada. `latest` cambia solo y una máquina limpia
+    # bajaría otra distinta.
+    image: arizephoenix/phoenix:version-20.19.0
     ports:
       - "6006:6006"   # UI + colector OTLP/HTTP (/v1/traces)
       - "4317:4317"   # colector OTLP/gRPC
