@@ -144,9 +144,9 @@ graph TD;
 	aprobacion_humana -.-> ejecutar_accion;
 	aprobacion_humana -.-> __end__;
 	ejecutar_accion --> __end__;
-	classDef default fill:#f2f0ff,line-height:1.2
+	classDef default fill:#f2f0ff,color:#1f1b3d,stroke:#7c6fd6,line-height:1.2
 	classDef first fill-opacity:0
-	classDef last fill:#bfb6fc
+	classDef last fill:#bfb6fc,color:#1f1b3d
 ```
 
 | Nodo | Qué hace | Herramientas |
