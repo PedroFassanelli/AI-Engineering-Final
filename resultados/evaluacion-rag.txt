@@ -1,0 +1,95 @@
+$ python -m app.cli evaluar-rag --k 3 --detalle   # 2026-10-12
+Golden set: 12 preguntas · 41 fragmentos · k=3
+
+variante                Recall@3   Hit@3    MRR     MRR lexica      MRR mixta  MRR semantica
+--------------------------------------------------------------------------------------------
+lexico (BM25)              91.7%   91.7%  0.819          0.708          1.000          0.800
+vectorial (Pinecone)       91.7%   91.7%  0.903          1.000          1.000          0.767
+hibrido 0.3/0.7            91.7%   91.7%  0.958          1.000          1.000          0.900
+
+Detalle — lexico (BM25)
+  [OK ] (lexica   ) RR=1.00  ¿Qué significa el código de error E4090?
+         03-manejo-de-errores.md, 03-manejo-de-errores.md, 02-referencia-api.md
+  [OK ] (lexica   ) RR=0.50  ¿Para qué sirve el encabezado X-Nimbus-Signature?
+         05-changelog-y-migracion.md, 04-webhooks-y-conciliacion.md, 01-guia-de-inicio.md
+  [OK ] (lexica   ) RR=0.33  ¿Qué hace el método capturar_pago y qué parámetros recibe?
+         05-changelog-y-migracion.md, 05-changelog-y-migracion.md, 02-referencia-api.md
+  [OK ] (mixta    ) RR=1.00  ¿Qué excepción lanza el SDK si no encuentra la clave de API?
+         01-guia-de-inicio.md, 03-manejo-de-errores.md, 03-manejo-de-errores.md
+  [OK ] (semantica) RR=1.00  ¿Hasta cuándo puedo devolverle la plata a un cliente después de haberle cobrado?
+         02-referencia-api.md, 05-changelog-y-migracion.md, 05-changelog-y-migracion.md
+  [OK ] (semantica) RR=1.00  ¿Qué pasa si reservo los fondos de una compra y después nunca termino de cobrarlos?
+         02-referencia-api.md, 01-guia-de-inicio.md, 01-guia-de-inicio.md
+  [OK ] (semantica) RR=1.00  ¿Cómo puedo probar la integración sin que se mueva dinero de verdad?
+         01-guia-de-inicio.md, 02-referencia-api.md, 01-guia-de-inicio.md
+  [OK ] (semantica) RR=1.00  ¿Cuánto dinero me termina entrando efectivamente a la cuenta bancaria?
+         04-webhooks-y-conciliacion.md, 01-guia-de-inicio.md, 03-manejo-de-errores.md
+  [OK ] (mixta    ) RR=1.00  ¿Qué cambios rompen compatibilidad en la versión 3.0.0 de la librería?
+         05-changelog-y-migracion.md, 05-changelog-y-migracion.md, 05-changelog-y-migracion.md
+  [OK ] (mixta    ) RR=1.00  ¿Cuántas solicitudes por minuto puedo hacer antes de que me limiten la tasa?
+         03-manejo-de-errores.md, 03-manejo-de-errores.md, 01-guia-de-inicio.md
+  [OK ] (lexica   ) RR=1.00  ¿El error E5030 se puede reintentar?
+         03-manejo-de-errores.md, 03-manejo-de-errores.md, 01-guia-de-inicio.md
+  [MISS] (semantica) RR=0.00  Al cliente no le alcanzaba el saldo de la tarjeta, ¿conviene volver a cobrarle?
+         01-guia-de-inicio.md, 02-referencia-api.md, 01-guia-de-inicio.md
+
+Detalle — vectorial (Pinecone)
+  [OK ] (lexica   ) RR=1.00  ¿Qué significa el código de error E4090?
+         03-manejo-de-errores.md, 03-manejo-de-errores.md, 03-manejo-de-errores.md
+  [OK ] (lexica   ) RR=1.00  ¿Para qué sirve el encabezado X-Nimbus-Signature?
+         04-webhooks-y-conciliacion.md, 05-changelog-y-migracion.md, 01-guia-de-inicio.md
+  [OK ] (lexica   ) RR=1.00  ¿Qué hace el método capturar_pago y qué parámetros recibe?
+         02-referencia-api.md, 01-guia-de-inicio.md, 05-changelog-y-migracion.md
+  [MISS] (mixta    ) RR=1.00  ¿Qué excepción lanza el SDK si no encuentra la clave de API?
+         01-guia-de-inicio.md, 05-changelog-y-migracion.md, 02-referencia-api.md
+  [OK ] (semantica) RR=1.00  ¿Hasta cuándo puedo devolverle la plata a un cliente después de haberle cobrado?
+         02-referencia-api.md, 01-guia-de-inicio.md, 04-webhooks-y-conciliacion.md
+  [OK ] (semantica) RR=0.33  ¿Qué pasa si reservo los fondos de una compra y después nunca termino de cobrarlos?
+         01-guia-de-inicio.md, 03-manejo-de-errores.md, 02-referencia-api.md
+  [OK ] (semantica) RR=1.00  ¿Cómo puedo probar la integración sin que se mueva dinero de verdad?
+         01-guia-de-inicio.md, 01-guia-de-inicio.md, 04-webhooks-y-conciliacion.md
+  [OK ] (semantica) RR=1.00  ¿Cuánto dinero me termina entrando efectivamente a la cuenta bancaria?
+         04-webhooks-y-conciliacion.md, 01-guia-de-inicio.md, 04-webhooks-y-conciliacion.md
+  [OK ] (mixta    ) RR=1.00  ¿Qué cambios rompen compatibilidad en la versión 3.0.0 de la librería?
+         05-changelog-y-migracion.md, 05-changelog-y-migracion.md, 05-changelog-y-migracion.md
+  [OK ] (mixta    ) RR=1.00  ¿Cuántas solicitudes por minuto puedo hacer antes de que me limiten la tasa?
+         03-manejo-de-errores.md, 01-guia-de-inicio.md, 01-guia-de-inicio.md
+  [OK ] (lexica   ) RR=1.00  ¿El error E5030 se puede reintentar?
+         03-manejo-de-errores.md, 03-manejo-de-errores.md, 01-guia-de-inicio.md
+  [OK ] (semantica) RR=0.50  Al cliente no le alcanzaba el saldo de la tarjeta, ¿conviene volver a cobrarle?
+         01-guia-de-inicio.md, 03-manejo-de-errores.md, 03-manejo-de-errores.md
+
+Detalle — hibrido 0.3/0.7
+  [OK ] (lexica   ) RR=1.00  ¿Qué significa el código de error E4090?
+         03-manejo-de-errores.md, 03-manejo-de-errores.md, 03-manejo-de-errores.md
+  [OK ] (lexica   ) RR=1.00  ¿Para qué sirve el encabezado X-Nimbus-Signature?
+         04-webhooks-y-conciliacion.md, 05-changelog-y-migracion.md, 01-guia-de-inicio.md
+  [OK ] (lexica   ) RR=1.00  ¿Qué hace el método capturar_pago y qué parámetros recibe?
+         02-referencia-api.md, 05-changelog-y-migracion.md, 01-guia-de-inicio.md
+  [MISS] (mixta    ) RR=1.00  ¿Qué excepción lanza el SDK si no encuentra la clave de API?
+         01-guia-de-inicio.md, 05-changelog-y-migracion.md, 02-referencia-api.md
+  [OK ] (semantica) RR=1.00  ¿Hasta cuándo puedo devolverle la plata a un cliente después de haberle cobrado?
+         02-referencia-api.md, 02-referencia-api.md, 03-manejo-de-errores.md
+  [OK ] (semantica) RR=0.50  ¿Qué pasa si reservo los fondos de una compra y después nunca termino de cobrarlos?
+         01-guia-de-inicio.md, 02-referencia-api.md, 02-referencia-api.md
+  [OK ] (semantica) RR=1.00  ¿Cómo puedo probar la integración sin que se mueva dinero de verdad?
+         01-guia-de-inicio.md, 02-referencia-api.md, 01-guia-de-inicio.md
+  [OK ] (semantica) RR=1.00  ¿Cuánto dinero me termina entrando efectivamente a la cuenta bancaria?
+         04-webhooks-y-conciliacion.md, 03-manejo-de-errores.md, 02-referencia-api.md
+  [OK ] (mixta    ) RR=1.00  ¿Qué cambios rompen compatibilidad en la versión 3.0.0 de la librería?
+         05-changelog-y-migracion.md, 05-changelog-y-migracion.md, 05-changelog-y-migracion.md
+  [OK ] (mixta    ) RR=1.00  ¿Cuántas solicitudes por minuto puedo hacer antes de que me limiten la tasa?
+         03-manejo-de-errores.md, 03-manejo-de-errores.md, 01-guia-de-inicio.md
+  [OK ] (lexica   ) RR=1.00  ¿El error E5030 se puede reintentar?
+         03-manejo-de-errores.md, 03-manejo-de-errores.md, 01-guia-de-inicio.md
+  [OK ] (semantica) RR=1.00  Al cliente no le alcanzaba el saldo de la tarjeta, ¿conviene volver a cobrarle?
+         03-manejo-de-errores.md, 03-manejo-de-errores.md, 03-manejo-de-errores.md
+
+$ python -m app.cli evaluar-rag --k 5
+Golden set: 12 preguntas · 41 fragmentos · k=5
+
+variante                Recall@5   Hit@5    MRR     MRR lexica      MRR mixta  MRR semantica
+--------------------------------------------------------------------------------------------
+lexico (BM25)             100.0%  100.0%  0.836          0.708          1.000          0.840
+vectorial (Pinecone)       95.8%  100.0%  0.903          1.000          1.000          0.767
+hibrido 0.3/0.7           100.0%  100.0%  0.958          1.000          1.000          0.900

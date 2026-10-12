@@ -1,0 +1,43 @@
+41 fragmentos · tokens min 22 / prom 180 / máx 484 · hash f4ab589a9584c06b…
+
+  01-guia-de-inicio.md::0                43 tok  [guia de inicio]  
+  01-guia-de-inicio.md::1                80 tok  [guia de inicio]  Instalación
+  01-guia-de-inicio.md::2               251 tok  [guia de inicio]  Autenticación
+  01-guia-de-inicio.md::3               256 tok  [guia de inicio]  Primer cobro
+  01-guia-de-inicio.md::4               189 tok  [guia de inicio]  Entorno de pruebas
+  01-guia-de-inicio.md::5               281 tok  [guia de inicio]  Tiempos de espera y reintentos
+  01-guia-de-inicio.md::6               210 tok  [guia de inicio]  Cliente asincrónico
+  01-guia-de-inicio.md::7               146 tok  [guia de inicio]  Registro y trazabilidad
+  01-guia-de-inicio.md::8               122 tok  [guia de inicio]  Antes de salir a producción
+  02-referencia-api.md::0                33 tok  [referencia api]  
+  02-referencia-api.md::1               368 tok  [referencia api]  `autorizar_pago()`
+  02-referencia-api.md::2               176 tok  [referencia api]  `capturar_pago()`
+  02-referencia-api.md::3               255 tok  [referencia api]  `reembolsar()`
+  02-referencia-api.md::4               143 tok  [referencia api]  `consultar_operacion()`
+  02-referencia-api.md::5               211 tok  [referencia api]  `listar_operaciones()`
+  02-referencia-api.md::6                74 tok  [referencia api]  `descargar_liquidacion()`
+  02-referencia-api.md::7               233 tok  [referencia api]  Idempotencia
+  02-referencia-api.md::8               101 tok  [referencia api]  Límites de los campos de metadata
+  03-manejo-de-errores.md::0             41 tok  [manejo de errores]  
+  03-manejo-de-errores.md::1            202 tok  [manejo de errores]  Jerarquía de excepciones
+  03-manejo-de-errores.md::2            452 tok  [manejo de errores]  Catálogo de códigos
+  03-manejo-de-errores.md::3            257 tok  [manejo de errores]  Cómo tratar un rechazo
+  03-manejo-de-errores.md::4            244 tok  [manejo de errores]  Límite de tasa
+  03-manejo-de-errores.md::5            131 tok  [manejo de errores]  Errores de servicio
+  03-manejo-de-errores.md::6            162 tok  [manejo de errores]  Trazabilidad
+  04-webhooks-y-conciliacion.md::0       48 tok  [webhooks y conciliacion]  
+  04-webhooks-y-conciliacion.md::1      219 tok  [webhooks y conciliacion]  Eventos disponibles
+  04-webhooks-y-conciliacion.md::2      484 tok  [webhooks y conciliacion]  Verificación de firma
+  04-webhooks-y-conciliacion.md::3      277 tok  [webhooks y conciliacion]  Reintentos de entrega
+  04-webhooks-y-conciliacion.md::4      158 tok  [webhooks y conciliacion]  Contracargos
+  04-webhooks-y-conciliacion.md::5      306 tok  [webhooks y conciliacion]  Conciliación diaria
+  05-changelog-y-migracion.md::0         22 tok  [changelog y migracion]  
+  05-changelog-y-migracion.md::1         82 tok  [changelog y migracion]  3.1.0 — 2026-05-06
+  05-changelog-y-migracion.md::2        311 tok  [changelog y migracion]  3.0.0 — 2026-02-18
+  05-changelog-y-migracion.md::3         83 tok  [changelog y migracion]  2.4.0 — 2025-11-04
+  05-changelog-y-migracion.md::4         39 tok  [changelog y migracion]  2.3.1 — 2025-09-22
+  05-changelog-y-migracion.md::5        229 tok  [changelog y migracion]  Migrar de 2.x a 3.0
+  05-changelog-y-migracion.md::6         91 tok  [changelog y migracion]  Las claves de idempotencia
+  05-changelog-y-migracion.md::7        141 tok  [changelog y migracion]  La paginación
+  05-changelog-y-migracion.md::8        114 tok  [changelog y migracion]  Orden sugerido de la migración
+  05-changelog-y-migracion.md::9        121 tok  [changelog y migracion]  Política de soporte

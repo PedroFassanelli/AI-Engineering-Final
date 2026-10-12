@@ -1,0 +1,30 @@
+---
+config:
+  flowchart:
+    curve: linear
+---
+graph TD;
+	__start__([<p>__start__</p>]):::first
+	supervisor(supervisor)
+	investigador(investigador)
+	analista(analista)
+	sintetizador(sintetizador)
+	planificador(planificador)
+	aprobacion_humana(aprobacion_humana)
+	ejecutar_accion(ejecutar_accion)
+	__end__([<p>__end__</p>]):::last
+	__start__ --> supervisor;
+	analista --> supervisor;
+	aprobacion_humana -.-> __end__;
+	aprobacion_humana -.-> ejecutar_accion;
+	investigador --> supervisor;
+	planificador -.-> __end__;
+	planificador -.-> aprobacion_humana;
+	sintetizador --> planificador;
+	supervisor -.-> analista;
+	supervisor -.-> investigador;
+	supervisor -.-> sintetizador;
+	ejecutar_accion --> __end__;
+	classDef default fill:#f2f0ff,line-height:1.2
+	classDef first fill-opacity:0
+	classDef last fill:#bfb6fc

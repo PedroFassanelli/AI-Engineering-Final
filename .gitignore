@@ -1,0 +1,14 @@
+# Secretos: el .env NUNCA se sube. Lo que se versiona es .env.example.
+.env
+
+# Entorno virtual
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Base de negocio: la siembra el worker al arrancar (o `python -m app.cli sembrar`)
+app/fuentes/nimbus.db

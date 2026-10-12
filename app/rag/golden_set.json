@@ -1,0 +1,103 @@
+{
+  "descripcion": "Golden set de la Pre-entrega 4, reutilizado para medir el RAG de la entrega final. `relevantes` son los documentos que deberian aparecer en el top-k (el primero es el principal). `tipo` dice que mitad del hibrido deberia resolver la consulta: `lexica` (un literal textual: codigo, funcion, encabezado), `semantica` (parafraseo sin vocabulario compartido) o `mixta`.",
+  "casos": [
+    {
+      "pregunta": "¿Qué significa el código de error E4090?",
+      "relevantes": [
+        "03-manejo-de-errores.md",
+        "02-referencia-api.md"
+      ],
+      "tipo": "lexica",
+      "nota": "El literal E4090 aparece textual en las dos fuentes. El vectorial suele fallar con codigos alfanumericos: son tokens rarisimos para el modelo de embeddings."
+    },
+    {
+      "pregunta": "¿Para qué sirve el encabezado X-Nimbus-Signature?",
+      "relevantes": [
+        "04-webhooks-y-conciliacion.md"
+      ],
+      "tipo": "lexica",
+      "nota": "Nombre propio de un header HTTP. Caso de libro para BM25."
+    },
+    {
+      "pregunta": "¿Qué hace el método capturar_pago y qué parámetros recibe?",
+      "relevantes": [
+        "02-referencia-api.md"
+      ],
+      "tipo": "lexica",
+      "nota": "Identificador de funcion exacto."
+    },
+    {
+      "pregunta": "¿Qué excepción lanza el SDK si no encuentra la clave de API?",
+      "relevantes": [
+        "03-manejo-de-errores.md",
+        "01-guia-de-inicio.md"
+      ],
+      "tipo": "mixta",
+      "nota": "La respuesta es ConfiguracionInvalida, que figura en la jerarquia de excepciones y tambien en la guia de inicio."
+    },
+    {
+      "pregunta": "¿Hasta cuándo puedo devolverle la plata a un cliente después de haberle cobrado?",
+      "relevantes": [
+        "02-referencia-api.md"
+      ],
+      "tipo": "semantica",
+      "nota": "La fuente dice 'reembolsar' y '180 dias'; la pregunta no usa ninguna de las dos palabras. BM25 no tiene con que enganchar."
+    },
+    {
+      "pregunta": "¿Qué pasa si reservo los fondos de una compra y después nunca termino de cobrarlos?",
+      "relevantes": [
+        "02-referencia-api.md"
+      ],
+      "tipo": "semantica",
+      "nota": "La fuente habla de una autorizacion que vence a las 168 horas y se libera sola."
+    },
+    {
+      "pregunta": "¿Cómo puedo probar la integración sin que se mueva dinero de verdad?",
+      "relevantes": [
+        "01-guia-de-inicio.md"
+      ],
+      "tipo": "semantica",
+      "nota": "La fuente lo llama 'ambiente sandbox'. Sin solape lexico con la pregunta."
+    },
+    {
+      "pregunta": "¿Cuánto dinero me termina entrando efectivamente a la cuenta bancaria?",
+      "relevantes": [
+        "04-webhooks-y-conciliacion.md"
+      ],
+      "tipo": "semantica",
+      "nota": "La respuesta es monto_neto, en la seccion de conciliacion diaria."
+    },
+    {
+      "pregunta": "¿Qué cambios rompen compatibilidad en la versión 3.0.0 de la librería?",
+      "relevantes": [
+        "05-changelog-y-migracion.md"
+      ],
+      "tipo": "mixta",
+      "nota": "El numero de version es un literal fuerte; 'rompen compatibilidad' aporta senal semantica."
+    },
+    {
+      "pregunta": "¿Cuántas solicitudes por minuto puedo hacer antes de que me limiten la tasa?",
+      "relevantes": [
+        "03-manejo-de-errores.md"
+      ],
+      "tipo": "mixta",
+      "nota": "El limite de 300 solicitudes por minuto aparece en el catalogo de errores, junto a E4290."
+    },
+    {
+      "pregunta": "¿El error E5030 se puede reintentar?",
+      "relevantes": [
+        "03-manejo-de-errores.md"
+      ],
+      "tipo": "lexica",
+      "nota": "Agregada en la entrega final: es la consulta que hace el investigador antes de una acción de reintento (HITL)."
+    },
+    {
+      "pregunta": "Al cliente no le alcanzaba el saldo de la tarjeta, ¿conviene volver a cobrarle?",
+      "relevantes": [
+        "03-manejo-de-errores.md"
+      ],
+      "tipo": "semantica",
+      "nota": "Agregada en la entrega final. La fuente dice 'fondos insuficientes' (E4021) y 'no reintentable'; la pregunta no usa ninguna de esas palabras."
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+# Finales de línea LF en el repo (run.sh y el Dockerfile tienen que andar en Linux/macOS).
+* text=auto eol=lf
+*.ps1 text eol=crlf
+*.png binary

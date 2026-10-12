@@ -1,0 +1,36 @@
+# Entrega final - The Intelligence System (Nimbus Pagos)
+# Python 3.12
+
+# --- API ---------------------------------------------------------------------
+fastapi>=0.115
+uvicorn[standard]>=0.30
+
+# --- Estado, cola y checkpoints (Redis) --------------------------------------
+redis>=5.2                         # cliente asincrono (redis.asyncio)
+arq>=0.26                          # cola de trabajos sobre Redis + worker en proceso aparte
+langgraph-checkpoint-redis>=0.1    # AsyncRedisSaver: checkpoints del grafo en Redis
+
+# --- Grafo y agentes ---------------------------------------------------------
+langgraph>=1.0
+langchain-core>=1.0
+langchain-openai>=1.0              # chat (PROVEEDOR=openai) y embeddings
+langchain-anthropic>=1.0           # PROVEEDOR=anthropic
+
+# --- RAG: Pinecone (vectorial) + BM25 (lexico) -------------------------------
+pinecone[asyncio]>=7.0             # PineconeAsyncio / IndexAsyncio: sin llamadas sync
+rank_bm25>=0.2
+langchain-text-splitters>=1.0      # sub-division de secciones largas, medida en tokens
+tiktoken>=0.8
+
+# --- Base de negocio ---------------------------------------------------------
+aiosqlite>=0.20
+
+# --- Observabilidad (Arize Phoenix via OpenInference) ------------------------
+arize-phoenix-otel>=0.10
+openinference-instrumentation-langchain>=0.1
+openinference-semantic-conventions>=0.1
+
+# --- Utilidades --------------------------------------------------------------
+pydantic>=2.9
+python-dotenv>=1.0
+httpx>=0.27                        # clientes de los scripts de prueba (async)

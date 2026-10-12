@@ -1,0 +1,10 @@
+# Lo que hace falta para correr los tests y regenerar las capturas.
+-r requirements.txt
+
+pytest>=8.0
+pytest-asyncio>=0.24
+fakeredis>=2.26                    # Redis en memoria para los tests (sin Docker)
+
+# Capturas del dashboard de Phoenix (scripts/capturas.py). Usa el Edge o
+# Chrome ya instalado: no hace falta `playwright install`.
+playwright>=1.47

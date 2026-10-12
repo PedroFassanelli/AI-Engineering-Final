@@ -1,0 +1,496 @@
+{
+  "fecha": "2026-10-12T17:41:56",
+  "url": "http://localhost:8000",
+  "reinicio_entre_fases": true,
+  "reinicio_segundos": 15.4,
+  "validacion_entrada": {
+    "pregunta_corta": 422,
+    "conversacion_id_invalido": 422
+  },
+  "escenarios": {
+    "rag_documentacion": {
+      "conversacion_id": "cf71bc9b479145f1af74555c95b79c56",
+      "turnos": [
+        {
+          "job_id": "bcd0c57871e24c1d8644647b9eaa1a42",
+          "conversacion_id": "cf71bc9b479145f1af74555c95b79c56",
+          "turno": 1,
+          "estado": "DONE",
+          "pregunta": "Estoy integrando nimbus-sdk. ¿Cómo pruebo la integración sin que se mueva plata de verdad, y qué tengo que revisar antes de salir a producción?",
+          "nodos": [
+            "supervisor",
+            "investigador",
+            "supervisor",
+            "sintetizador",
+            "planificador"
+          ],
+          "respuesta": "Para probar la integración de nimbus-sdk sin mover dinero real, debes utilizar el entorno de pruebas (sandbox) de Nimbus. Esto se configura estableciendo `ambiente=\"sandbox\"` en el cliente de Nimbus, lo que apunta a `https://sandbox.api.nimbus.io`. En este entorno, puedes usar tarjetas de prueba que simulan diferentes resultados de transacciones, como aprobación, fondos insuficientes, tarjeta robada y timeout del adquirente. Es recomendable tener un test de integración para cada uno de estos escenarios, no solo para el caso exitoso. Recuerda que los identificadores de sandbox y producción no son intercambiables; un `aut_` generado en sandbox devolverá un error 404 en producción [01-guia-de-inicio.md].\n\nAntes de salir a producción, debes revisar varios aspectos: cambiar el `ambiente` a `production` y las claves de API de `sk_test_` a `sk_live_`, confirmar que todos los montos se calculan en enteros desde la base de datos, definir cómo se generan las `idempotency_key` y asegurarte de que sean estables ante reintentos del usuario, configurar el endpoint de webhooks y verificar la firma, y guardar el `request_id` de cada operación junto al pedido [01-guia-de-inicio.md]. También se sugiere seguir un orden de migración que incluya actualizar la librería, correr pruebas en sandbox, convertir montos a enteros, y reemplazar las llamadas de pago por el par autorizar/capturar antes de apuntar a producción [05-changelog-y-migracion.md].",
+          "aprobacion_pendiente": null,
+          "aprobacion": null,
+          "resultado_accion": null,
+          "error": null,
+          "duracion_segundos": 14.22,
+          "duracion_reanudacion_segundos": null,
+          "_e2e_s": 15.25
+        }
+      ],
+      "chequeos": [
+        {
+          "chequeo": "DONE",
+          "ok": true
+        },
+        {
+          "chequeo": "pasó por el investigador",
+          "ok": true
+        },
+        {
+          "chequeo": "no hizo falta el analista",
+          "ok": true
+        },
+        {
+          "chequeo": "cita la guía de inicio",
+          "ok": true
+        }
+      ]
+    },
+    "multipaso": {
+      "conversacion_id": "f4975eb21feb42e2948620245f50c850",
+      "turnos": [
+        {
+          "job_id": "310cbea3ade2440699d534252302224e",
+          "conversacion_id": "f4975eb21feb42e2948620245f50c850",
+          "turno": 1,
+          "estado": "DONE",
+          "pregunta": "El comercio Bazar Pampa viene teniendo pagos fallidos. ¿Cuál es el código de error que más se repite, qué significa según la documentación y cómo se resuelve? Y cuantificalo: qué porcentaje de sus pagos y qué porcentaje del monto total representan los fallidos por ese código.",
+          "nodos": [
+            "supervisor",
+            "investigador",
+            "supervisor",
+            "analista",
+            "supervisor",
+            "sintetizador",
+            "planificador"
+          ],
+          "respuesta": "El código de error que más se repite en los pagos fallidos del comercio Bazar Pampa es `E4090`, que significa `ConflictoIdempotencia`. Este error ocurre cuando se utiliza la misma clave pero con un cuerpo distinto en la solicitud. Según la documentación, este error no es reintentable [03-manejo-de-errores.md].\n\nEl porcentaje de pagos fallidos con el código de error `E4090` sobre el total de pagos es 42.86%. Además, el porcentaje del monto total de pagos fallidos con este código sobre el monto total es 58.83% [03-manejo-de-errores.md].",
+          "aprobacion_pendiente": null,
+          "aprobacion": null,
+          "resultado_accion": null,
+          "error": null,
+          "duracion_segundos": 23.418,
+          "duracion_reanudacion_segundos": null,
+          "_e2e_s": 24.34
+        }
+      ],
+      "chequeos": [
+        {
+          "chequeo": "DONE",
+          "ok": true
+        },
+        {
+          "chequeo": "investigador y analista",
+          "ok": true
+        },
+        {
+          "chequeo": "identifica E4090",
+          "ok": true
+        },
+        {
+          "chequeo": "cita el catálogo de errores",
+          "ok": true
+        },
+        {
+          "chequeo": "da el porcentaje de pagos (42,86 %)",
+          "ok": true
+        }
+      ]
+    },
+    "conversacion": {
+      "conversacion_id": "8b5956807ef34d00860f3e20c0f0e99c",
+      "turnos": [
+        {
+          "job_id": "24ba7f110b024338982107e8e2bb94a8",
+          "conversacion_id": "8b5956807ef34d00860f3e20c0f0e99c",
+          "turno": 1,
+          "estado": "DONE",
+          "pregunta": "¿Qué código de error tuvo el pago fallido de Café Tortoni Centro y qué significa?",
+          "nodos": [
+            "supervisor",
+            "investigador",
+            "supervisor",
+            "sintetizador",
+            "planificador"
+          ],
+          "respuesta": "El pago fallido de Café Tortoni Centro tuvo el código de error **E4021**. Este código corresponde a la excepción **PagoRechazado**, que significa que hubo **fondos insuficientes**. Además, este error no es reintentable, lo que implica que no se puede volver a intentar el pago automáticamente [03-manejo-de-errores.md].",
+          "aprobacion_pendiente": null,
+          "aprobacion": null,
+          "resultado_accion": null,
+          "error": null,
+          "duracion_segundos": 11.417,
+          "duracion_reanudacion_segundos": null,
+          "_e2e_s": 12.19
+        },
+        {
+          "job_id": "dc78be25586e4d65b74f14ca2813d3a0",
+          "conversacion_id": "8b5956807ef34d00860f3e20c0f0e99c",
+          "turno": 2,
+          "estado": "DONE",
+          "pregunta": "¿Y ese error es reintentable? ¿Qué le recomendarías al comercio?",
+          "nodos": [
+            "supervisor",
+            "investigador",
+            "supervisor",
+            "sintetizador",
+            "planificador"
+          ],
+          "respuesta": "El código de error del pago fallido de Café Tortoni Centro es **E4021**, que corresponde a la excepción **PagoRechazado** por **fondos insuficientes**. Este error **no es reintentable**, lo que significa que no se puede volver a intentar el pago automáticamente, y cualquier intento de reintento no cambiará el resultado del pago [03-manejo-de-errores.md].\n\nRecomendaría al comercio Café Tortoni Centro que informe al cliente sobre la situación y le sugiera que verifique su saldo o se comunique con su entidad bancaria para resolver el problema de fondos insuficientes.",
+          "aprobacion_pendiente": null,
+          "aprobacion": null,
+          "resultado_accion": null,
+          "error": null,
+          "duracion_segundos": 9.893,
+          "duracion_reanudacion_segundos": null,
+          "_e2e_s": 10.64
+        }
+      ],
+      "chequeos": [
+        {
+          "chequeo": "DONE",
+          "ok": true
+        },
+        {
+          "chequeo": "identifica E4021",
+          "ok": true
+        },
+        {
+          "chequeo": "el turno 1 sigue en el checkpoint tras el reinicio",
+          "ok": true
+        },
+        {
+          "chequeo": "DONE",
+          "ok": true
+        },
+        {
+          "chequeo": "es el turno 2",
+          "ok": true
+        },
+        {
+          "chequeo": "resolvió 'ese error' = E4021",
+          "ok": true
+        },
+        {
+          "chequeo": "dice que no es reintentable",
+          "ok": true
+        }
+      ]
+    },
+    "hitl_aprobado": {
+      "conversacion_id": "915181f186cf46d08bc111bb129ea52b",
+      "turnos": [
+        {
+          "job_id": "66ba68da21494047859548ca3ff67cb2",
+          "conversacion_id": "915181f186cf46d08bc111bb129ea52b",
+          "turno": 1,
+          "estado": "DONE",
+          "pregunta": "Viajes Aconcagua tuvo pagos fallidos por el código E5030. Explicame qué significa según la documentación y programá el reintento de esos pagos fallidos.",
+          "nodos": [
+            "supervisor",
+            "investigador",
+            "supervisor",
+            "analista",
+            "supervisor",
+            "sintetizador",
+            "planificador",
+            "aprobacion_humana",
+            "ejecutar_accion"
+          ],
+          "respuesta": "El código de error `E5030` indica que \"el adquirente no contestó dentro de la ventana\". Este error es un tipo de `ErrorDeServicio` y es reintentable. Es importante que el reintento lleve la misma `idempotency_key`, ya que si la operación se había procesado, Nimbus devolverá la original; de lo contrario, se podría cobrar dos veces [03-manejo-de-errores.md].\n\nSe encontraron 2 pagos fallidos con el código de error `E5030`, y el monto total de estos pagos es de 63000 CLP.\n\nAcción ejecutada (aprobada por operaciones): se programó el reintento de pay_10502, pay_10503 por CLP 63.000,00.",
+          "aprobacion_pendiente": {
+            "tipo": "programar_reintentos",
+            "resumen": "Programar el reintento de 2 pago(s) fallido(s) de Viajes Aconcagua por CLP 63.000,00.",
+            "comercio_id": 105,
+            "comercio": "Viajes Aconcagua",
+            "pago_ids": [
+              "pay_10502",
+              "pay_10503"
+            ],
+            "monto_total_centavos": 6300000,
+            "moneda": "CLP",
+            "codigos_error": [
+              "E5030"
+            ],
+            "motivo": "El usuario pidió programar el reintento de los pagos fallidos de Viajes Aconcagua con código E5030.",
+            "criticidad": [
+              "Efecto secundario: genera nuevos intentos de cobro sobre los medios de pago de los clientes (escribe en reintentos_programados).",
+              "Monto alto: CLP 63.000,00 (umbral CLP 10.000,00)."
+            ],
+            "descartados": [],
+            "como_responder": "POST /tasks/{job_id}/approve  {\"aprobado\": true|false, \"revisor\": \"...\", \"comentario\": \"...\"}"
+          },
+          "aprobacion": {
+            "aprobado": true,
+            "revisor": "operaciones",
+            "comentario": "E5030 es reintentable",
+            "decidido_en": null
+          },
+          "resultado_accion": {
+            "ejecutada": true,
+            "detalle": "Acción ejecutada (aprobada por operaciones): se programó el reintento de pay_10502, pay_10503 por CLP 63.000,00.",
+            "pago_ids": [
+              "pay_10502",
+              "pay_10503"
+            ]
+          },
+          "error": null,
+          "duracion_segundos": 21.119,
+          "duracion_reanudacion_segundos": 0.249,
+          "_e2e_s": null
+        }
+      ],
+      "chequeos": [
+        {
+          "chequeo": "pausa para aprobación",
+          "ok": true
+        },
+        {
+          "chequeo": "propone pay_10502 y pay_10503",
+          "ok": true
+        },
+        {
+          "chequeo": "explica por qué es crítica",
+          "ok": true
+        },
+        {
+          "chequeo": "DONE tras la decisión",
+          "ok": true
+        },
+        {
+          "chequeo": "se ejecutó",
+          "ok": true
+        },
+        {
+          "chequeo": "reanudó en el mismo hilo",
+          "ok": true
+        }
+      ]
+    },
+    "hitl_rechazado": {
+      "conversacion_id": "4b0ea62249d34ead9a530e5d076818de",
+      "turnos": [
+        {
+          "job_id": "c792994061bb4f3697a23998611d5845",
+          "conversacion_id": "4b0ea62249d34ead9a530e5d076818de",
+          "turno": 1,
+          "estado": "DONE",
+          "pregunta": "Bazar Pampa tiene pagos fallidos por E4090. Reintentá esos pagos fallidos.",
+          "nodos": [
+            "supervisor",
+            "investigador",
+            "supervisor",
+            "analista",
+            "supervisor",
+            "sintetizador",
+            "planificador",
+            "aprobacion_humana"
+          ],
+          "respuesta": "Bazar Pampa tiene 3 pagos fallidos con el código de error E4090, que corresponden a un total de 39300 ARS. El código de error E4090 se refiere a un \"Conflicto de Idempotencia\", y según la documentación técnica, este error no es reintentable. Reintentar un pago con este código no lo convierte en aprobado y solo suma latencia y alimenta las métricas de fraude del emisor [03-manejo-de-errores.md].\n\nAcción rechazada por operaciones: E4090 no es reintentable. No se programó ningún reintento.",
+          "aprobacion_pendiente": {
+            "tipo": "programar_reintentos",
+            "resumen": "Programar el reintento de 3 pago(s) fallido(s) de Bazar Pampa por ARS 39.300,00.",
+            "comercio_id": 104,
+            "comercio": "Bazar Pampa",
+            "pago_ids": [
+              "pay_10402",
+              "pay_10403",
+              "pay_10405"
+            ],
+            "monto_total_centavos": 3930000,
+            "moneda": "ARS",
+            "codigos_error": [
+              "E4090"
+            ],
+            "motivo": "El usuario pidió reintentar los pagos fallidos de Bazar Pampa con código E4090.",
+            "criticidad": [
+              "Efecto secundario: genera nuevos intentos de cobro sobre los medios de pago de los clientes (escribe en reintentos_programados).",
+              "Monto alto: ARS 39.300,00 (umbral ARS 10.000,00).",
+              "Acción masiva: 3 pagos de una vez.",
+              "ADVERTENCIA: E4090 figura como NO reintentable en 03-manejo-de-errores.md. El reintento probablemente vuelva a fallar."
+            ],
+            "descartados": [],
+            "como_responder": "POST /tasks/{job_id}/approve  {\"aprobado\": true|false, \"revisor\": \"...\", \"comentario\": \"...\"}"
+          },
+          "aprobacion": {
+            "aprobado": false,
+            "revisor": "operaciones",
+            "comentario": "E4090 no es reintentable",
+            "decidido_en": null
+          },
+          "resultado_accion": {
+            "ejecutada": false,
+            "detalle": "Acción rechazada por operaciones: E4090 no es reintentable. No se programó ningún reintento.",
+            "pago_ids": []
+          },
+          "error": null,
+          "duracion_segundos": 22.506,
+          "duracion_reanudacion_segundos": 0.221,
+          "_e2e_s": null
+        }
+      ],
+      "chequeos": [
+        {
+          "chequeo": "pausa para aprobación",
+          "ok": true
+        },
+        {
+          "chequeo": "advierte que E4090 no es reintentable",
+          "ok": true
+        },
+        {
+          "chequeo": "propone los 3 pagos E4090",
+          "ok": true
+        },
+        {
+          "chequeo": "si la respuesta lista pagos, lista los 3",
+          "ok": true
+        },
+        {
+          "chequeo": "DONE tras la decisión",
+          "ok": true
+        },
+        {
+          "chequeo": "NO se ejecutó",
+          "ok": true
+        },
+        {
+          "chequeo": "reanudó en el mismo hilo",
+          "ok": true
+        }
+      ]
+    },
+    "comercio_inexistente": {
+      "conversacion_id": "d689862b064243f5aca48d6a3181c363",
+      "turnos": [
+        {
+          "job_id": "831274182acd4d0ab6d0a9c8b421d4f9",
+          "conversacion_id": "d689862b064243f5aca48d6a3181c363",
+          "turno": 1,
+          "estado": "DONE",
+          "pregunta": "¿Qué pagos fallidos tuvo el comercio Ferretería Los Andes y por qué fallaron?",
+          "nodos": [
+            "supervisor",
+            "investigador",
+            "supervisor",
+            "investigador",
+            "supervisor",
+            "sintetizador",
+            "planificador"
+          ],
+          "respuesta": "No encontré ningún comercio registrado con el nombre \"Ferretería Los Andes\" ni con variaciones como \"Ferretería\" o \"Andes\". La búsqueda no devolvió resultados, por lo que no puedo identificar el comercio en la base de datos.\n\nLimitaciones y problemas abiertos:\n- investigador: `buscar_comercio` terminó en error: No hay ningún comercio con ese nombre.\n- El analista no intervino.\n- Criterios de validación que no se cumplieron: cobertura, respaldo.",
+          "aprobacion_pendiente": null,
+          "aprobacion": null,
+          "resultado_accion": null,
+          "error": null,
+          "duracion_segundos": 15.058,
+          "duracion_reanudacion_segundos": null,
+          "_e2e_s": 16.76
+        }
+      ],
+      "chequeos": [
+        {
+          "chequeo": "DONE (no FAILED)",
+          "ok": true
+        },
+        {
+          "chequeo": "no inventa pagos",
+          "ok": true
+        }
+      ]
+    }
+  },
+  "conversacion_completa": {
+    "conversacion_id": "8b5956807ef34d00860f3e20c0f0e99c",
+    "creada_en": "2026-10-12T20:41:03.977+00:00",
+    "actualizada_en": "2026-10-12T20:41:56.164+00:00",
+    "turnos": 2,
+    "job_activo": null,
+    "mensajes": [
+      {
+        "rol": "usuario",
+        "autor": "usuario",
+        "contenido": "¿Qué código de error tuvo el pago fallido de Café Tortoni Centro y qué significa?"
+      },
+      {
+        "rol": "asistente",
+        "autor": "sintetizador",
+        "contenido": "El pago fallido de Café Tortoni Centro tuvo el código de error **E4021**. Este código corresponde a la excepción **PagoRechazado**, que significa que hubo **fondos insuficientes**. Además, este error no es reintentable, lo que implica que no se puede volver a intentar el pago automáticamente [03-manejo-de-errores.md]."
+      },
+      {
+        "rol": "usuario",
+        "autor": "usuario",
+        "contenido": "¿Y ese error es reintentable? ¿Qué le recomendarías al comercio?"
+      },
+      {
+        "rol": "asistente",
+        "autor": "sintetizador",
+        "contenido": "El código de error del pago fallido de Café Tortoni Centro es **E4021**, que corresponde a la excepción **PagoRechazado** por **fondos insuficientes**. Este error **no es reintentable**, lo que significa que no se puede volver a intentar el pago automáticamente, y cualquier intento de reintento no cambiará el resultado del pago [03-manejo-de-errores.md].\n\nRecomendaría al comercio Café Tortoni Centro que informe al cliente sobre la situación y le sugiera que verifique su saldo o se comunique con su entidad bancaria para resolver el problema de fondos insuficientes."
+      }
+    ],
+    "jobs": [
+      {
+        "job_id": "24ba7f110b024338982107e8e2bb94a8",
+        "conversacion_id": "8b5956807ef34d00860f3e20c0f0e99c",
+        "turno": 1,
+        "estado": "DONE",
+        "pregunta": "¿Qué código de error tuvo el pago fallido de Café Tortoni Centro y qué significa?",
+        "creado_en": "2026-10-12T20:41:03.977+00:00",
+        "actualizado_en": "2026-10-12T20:41:15.614+00:00",
+        "iniciado_en": "2026-10-12T20:41:04.127+00:00",
+        "reanudado_en": null,
+        "terminado_en": "2026-10-12T20:41:15.614+00:00",
+        "nodo_actual": "planificador",
+        "nodos": [
+          "supervisor",
+          "investigador",
+          "supervisor",
+          "sintetizador",
+          "planificador"
+        ],
+        "aprobacion_pendiente": null,
+        "aprobacion": null,
+        "respuesta": "El pago fallido de Café Tortoni Centro tuvo el código de error **E4021**. Este código corresponde a la excepción **PagoRechazado**, que significa que hubo **fondos insuficientes**. Además, este error no es reintentable, lo que implica que no se puede volver a intentar el pago automáticamente [03-manejo-de-errores.md].",
+        "task_completed": true,
+        "resultado_accion": null,
+        "error": null,
+        "duracion_segundos": 11.417,
+        "duracion_reanudacion_segundos": null
+      },
+      {
+        "job_id": "dc78be25586e4d65b74f14ca2813d3a0",
+        "conversacion_id": "8b5956807ef34d00860f3e20c0f0e99c",
+        "turno": 2,
+        "estado": "DONE",
+        "pregunta": "¿Y ese error es reintentable? ¿Qué le recomendarías al comercio?",
+        "creado_en": "2026-10-12T20:41:45.717+00:00",
+        "actualizado_en": "2026-10-12T20:41:56.159+00:00",
+        "iniciado_en": "2026-10-12T20:41:46.230+00:00",
+        "reanudado_en": null,
+        "terminado_en": "2026-10-12T20:41:56.159+00:00",
+        "nodo_actual": "planificador",
+        "nodos": [
+          "supervisor",
+          "investigador",
+          "supervisor",
+          "sintetizador",
+          "planificador"
+        ],
+        "aprobacion_pendiente": null,
+        "aprobacion": null,
+        "respuesta": "El código de error del pago fallido de Café Tortoni Centro es **E4021**, que corresponde a la excepción **PagoRechazado** por **fondos insuficientes**. Este error **no es reintentable**, lo que significa que no se puede volver a intentar el pago automáticamente, y cualquier intento de reintento no cambiará el resultado del pago [03-manejo-de-errores.md].\n\nRecomendaría al comercio Café Tortoni Centro que informe al cliente sobre la situación y le sugiera que verifique su saldo o se comunique con su entidad bancaria para resolver el problema de fondos insuficientes.",
+        "task_completed": true,
+        "resultado_accion": null,
+        "error": null,
+        "duracion_segundos": 9.893,
+        "duracion_reanudacion_segundos": null
+      }
+    ]
+  }
+}
